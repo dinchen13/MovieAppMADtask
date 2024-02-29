@@ -56,6 +56,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.movieappmad24.models.Movie
 import com.example.movieappmad24.models.getMovies
 import com.example.movieappmad24.ui.theme.MovieAppMAD24Theme
@@ -159,10 +160,19 @@ fun MovieRow(movie: Movie){
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
+                AsyncImage(
+                    modifier = Modifier.fillMaxSize(),
+                    model = movie.images[1],
+                    contentDescription = null,
+                    placeholder = painterResource(id = R.drawable.movie_image),
+                    contentScale = ContentScale.Crop
+                )
+/*
                 Image(
                     painter = painterResource(id = R.drawable.movie_image),
                     contentScale = ContentScale.Crop,
                     contentDescription = "placeholder image")
+ */
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
