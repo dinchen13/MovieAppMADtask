@@ -3,6 +3,8 @@ package com.example.movieappmad24
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +28,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -188,6 +191,18 @@ fun MovieRow(movie: Movie){
                     imageVector =
                         if (showDetails) Icons.Filled.KeyboardArrowDown
                         else Icons.Default.KeyboardArrowUp, contentDescription = "show more")
+            }
+            //Text(text = movie.plot, maxLines = if (showDetails) Int.MAX_VALUE else 1)   //das wär eine zweite option statt andimatedvisability dazu braucht man aber noch irgendwo ein .animateContentSize() beim Modifier
+            AnimatedVisibility(showDetails) {
+                Column(Modifier.padding(15.dp)) {
+                    Text(text = "Director: " + movie.director)
+                    Text(text = "Released: " + movie.year)
+                    Text(text = "Genre: " + movie.genre)
+                    Text(text = "Actors: " + movie.actors)
+                    Text(text = "Rating: " + movie.rating)
+                    Divider()
+                    Text(text = "Plot: " + movie.plot)
+                }
             }
         }
     }
