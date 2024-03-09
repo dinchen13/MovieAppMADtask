@@ -226,3 +226,4 @@ fun DefaultPreview(){
        MovieList(movies = getMovies())
     }
 }
+
