@@ -75,7 +75,7 @@ fun HomeScaffold(){
         modifier= Modifier
             .fillMaxSize(),
         topBar = {
-            HomeTopBar()
+            HomeTopBar("Movie App")
         },
         bottomBar = {
             HomeBottomBar()
@@ -94,10 +94,10 @@ fun HomeScaffold(){
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)     //das braucht man für die topbar, macht der typ im youtubevideo auch (von den bereitgestellten resourcen)
-fun HomeTopBar() {      //eigenen funktion mainly for readability
+fun HomeTopBar(text:String?) {      //eigenen funktion mainly for readability
     CenterAlignedTopAppBar(
         title = {
-            Text("Movie App")
+            Text(text?:"")
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.onBackground,  //hab das hinzugefügt zu Theme.kt damit ich dafür auch eine dynamische farbe hab
@@ -106,7 +106,7 @@ fun HomeTopBar() {      //eigenen funktion mainly for readability
     )
 }
 @Composable
-fun HomeBottomBar(){    //eigenen funktion mainly for readability
+fun HomeBottomBar(){    //eigenen funktion mainly for readability, kann man aber auch nochmal gebrauchen wenn man eine bottom bar mit den gleichen symbolen hat
     BottomAppBar(
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = MaterialTheme.colorScheme.primary,
@@ -158,7 +158,7 @@ fun MovieRow(movie: Movie){
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
-                HttpImageOfMovie(movie.images[1], "image of " + movie.title)
+                HttpImageOfMovie(movie.images[1], "image of " + movie.title) //because there are multiple pictures provided, i take the first one
                 Box(            //fürs Plazieren vom Icon
                     modifier = Modifier
                         .fillMaxSize()
@@ -212,7 +212,7 @@ fun MovieInfo(movie:Movie){     //eigene funktion weil ich vielleicht später ma
 fun HttpImageOfMovie(httpSource:String, description:String?){      //eigenen funktion wenn ich sonst nochmal irgenwo bilder von http source schnell anzeigen will
     AsyncImage(
         modifier = Modifier.fillMaxSize(),
-        model = httpSource,    //because there are multiple pictures provided, i take the first one
+        model = httpSource,
         contentDescription = description?:"no description available",
         placeholder = painterResource(id = R.drawable.movie_image),
         contentScale = ContentScale.Crop
